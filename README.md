@@ -74,3 +74,30 @@ urlpatterns = [
 ]
 
 To open the page run server and request url http://localhost:8000/whoami/?name=greg&sex=male
+
+
+Creating forms:
+
+In website/urls.py:
+
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+]
+
+In demo/views.py:
+
+def post_list(request):
+    return render(request, 'blog/post_list.html', {})
+
+Now create a template to display:
+
+Create demo/templates/demo
+
+In demo/templates/demo/post_list.html
+
+<html>
+<body>
+    <p>Hi there!</p>
+    <p>It works!</p>
+</body>
+</html>
