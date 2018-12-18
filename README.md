@@ -112,6 +112,7 @@ models.Model means that the Post is a Django Model, so Django knows that it shou
 - models.DateTimeField – this is a date and time.
 - models.ForeignKey – this is a link to another model.
 
+Step 2. Create tables for models in your database
 
 python3 manage.py makemigrations demo
 
@@ -182,7 +183,7 @@ Forms.
 
 add line <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
 
-4. In demo/urls.py:
+4. In website/urls.py:
 
 add line path('post/new', views.post_new, name='post_new'),
 
@@ -209,6 +210,7 @@ def post_new(request):
 7. Saving/proccessing the form
 
 In demo/views.py:
+from django.shortcuts import redirect
 
 def post_new(request):
     if request.method == "POST":
