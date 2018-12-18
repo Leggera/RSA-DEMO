@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-
+from .blockchain_functions import *
 
 '''class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -28,3 +28,14 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+        
+class FastPow(models.Model):
+
+    x = models.IntegerField()
+    n = models.IntegerField()
+    mod = models.IntegerField()
+    power = models.IntegerField()
+
+    def compute(self):
+        self.power = fast_pow(self.x, self.n, self.mod)
+        self.save()
