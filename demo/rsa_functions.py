@@ -58,13 +58,20 @@ def generate_modulo(bitlen, tc=1000):
     return  n, (p-1)*(q-1)
 
 def rsa_generate_keys(bitlen, tc=1000):
+    '''
+    inputs:
+    bitlen - bitwise size of the keys
+    tc - number of iterations for cheking the primality
+    returns:
+    private_key: (modulo, exponent), public_key: (modulo, exponent)
+    '''
     n, phi = generate_modulo(bitlen, tc)
-    k = bitlen//randint(2, 4)
-    e = randint( 2**(k-1), 2**k )
+    k = randint(bitlen//12, bitlen//20)
+    e = 2**k + 2 * randint( 2**(k//8), 2**(k//4) ) + 1 # a common convention to generate public exponent first
     g, x, y = egcd(e, phi)
     d = x % phi
     while (g != 1):
-        e = randint( 2**(k-1), 2**k )
+        e = 2**k + 2 * randint( 2**(k//8), 2**(k//4) ) + 1
         g, x, y = egcd(e, phi)
         d = x % phi
     return (n, d), (n, e)
